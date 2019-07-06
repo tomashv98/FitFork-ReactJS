@@ -305,8 +305,8 @@ body {
   background-color: #f9f5f3;
   transform: translateY(-2px);
 }
-.results__link--active,
-.likes__link--active {
+.results__link__active,
+.likes__link__active {
   background-color: #f9f5f3;
 }
 .results__fig,

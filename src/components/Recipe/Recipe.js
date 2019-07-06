@@ -10,41 +10,41 @@ import RecipeDirections from './RecipeDirections';
 import Spinner from '../Spinner/Spinner';
 import Aux from '../../Aux';
 
-const Recipe = props => {
+const Recipe =({loading, recipe, error, onLikeClick, onAddToShoppingCart, updateServings}) => {
   return (
     <div className={classes.recipe}>
-      {props.loading ? <Spinner /> : null}
-      {props.recipe && !props.loading && !props.error ? (
+      {loading ? <Spinner /> : null}
+      {recipe && !loading && !error ? (
         <Aux>
           <RecipeHeader
-            imageURL={props.recipe.img}
-            title={props.recipe.title}
+            imageURL={recipe.img}
+            title={recipe.title}
           />
           <RecipeDetails
-            servings={props.recipe.servings}
-            time={props.recipe.time}
-            onLikeClick={props.onLikeClick}
-            isLiked={props.recipe.liked}
-            updateServings={props.updateServings}
+            servings={recipe.servings}
+            time={recipe.time}
+            onLikeClick={onLikeClick}
+            isLiked={recipe.liked}
+            updateServings={updateServings}
           />
           <div className={classes.recipe__ingredients}>
-            <RecipeIngList ingredients={props.recipe.ingredients} />
+            <RecipeIngList ingredients={recipe.ingredients} />
             <button
               className={classes.btn_small}
-              onClick={props.onAddToShoppingCart}
+              onClick={onAddToShoppingCart}
             >
               <img src={cartIcon} className={classes.search__icon} alt='Cart' />
               <span>Add to shopping list</span>
             </button>
           </div>
           <RecipeDirections
-            source={props.recipe.url}
-            author={props.recipe.author}
+            source={recipe.url}
+            author={recipe.author}
           />
         </Aux>
       ) : (
         <div>
-          <p>{props.error}</p>
+          <p>{error}</p>
         </div>
       )}
     </div>

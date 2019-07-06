@@ -4,16 +4,16 @@ import classes from '../../App.module.css';
 import checkIcon from '../../img/check.png';
 import { formatQuantity } from '../../utils/utility';
 
-const RecipeIngItem = props => {
+const RecipeIngItem = ({ingredient})=> {
   return (
     <li className={classes.recipe__item}>
       <img src={checkIcon} className={classes.recipe__icon} alt='x' />
       <div className={classes.recipe__count}>
-        {formatQuantity(props.ingredient.count)}
+        {formatQuantity(ingredient.count)}
       </div>
       <div className={classes.recipe__ingredient}>
-        <span className={classes.recipe__unit}>{props.ingredient.unit} </span>
-        {props.ingredient.ingredient}
+        <span className={classes.recipe__unit}>{ingredient.unit} </span>
+        {ingredient.ingredient}
       </div>
     </li>
   );

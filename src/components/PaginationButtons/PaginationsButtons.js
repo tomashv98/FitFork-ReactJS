@@ -4,20 +4,20 @@ import classes from '../../App.module.css';
 import Button from './Button';
 import Aux from '../../Aux';
 
-const PaginationsButtons = props => {
+const PaginationsButtons =({paginate, currentPage}) => {
   return (
     <div className={classes.results__pages}>
-      {props.currentPage === 1 && <Button paginate={props.paginate} btnType='next' />}
-      {props.currentPage === 2 && (
+      {currentPage === 1 && <Button paginate={paginate} btnType='next' />}
+      {currentPage === 2 && (
         <Aux>
-          <Button paginate={props.paginate} btnType='prev' />
-          <Button paginate={props.paginate} btnType='next' />
+          <Button paginate={paginate} btnType='prev' />
+          <Button paginate={paginate} btnType='next' />
         </Aux>
       )}
-      {props.currentPage === 3 && <Button paginate={props.paginate} btnType='prev' />}}
+      {currentPage === 3 && <Button paginate={paginate} btnType='prev' />}
     </div>
   );
 };
 
 export default PaginationsButtons;
-// <Button paginate={props.paginate} btnType='next' btnNo={2} />
+// <Button paginate={paginate} btnType='next' btnNo={2} />

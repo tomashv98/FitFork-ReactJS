@@ -36,7 +36,13 @@ export const fractToDecimal = fractVal => {
 };
 
 //Ingredients manipulation
-
+const calcTime = (array) => {
+  // Assuming that we need 15 min for each 3 ingredients
+  const numIng = array.length;
+  const periods = Math.ceil(numIng / 3);
+  const time = periods * 15;
+  return time
+}
 export const getUnique = (arr, comp) => {
   const unique = arr
     .map(e => e[comp])
@@ -183,7 +189,7 @@ export const fetchRecipes = async query => {
     //console.log('Fetch successfull, recipe count: ', data);
     return data.recipes;
   } else {
-    //console.log('Fetch unsuccessfull :(', data);
+    console.log('Fetch unsuccessfull :(', data);
     return null;
   }
 };
@@ -198,12 +204,13 @@ export const fetchSingleRecipe = async id => {
     const ingredientsArr = parseIngredients(data.recipe.ingredients);
     //console.log('parsed', ingredientsArr);
 
-    const recipe = updateObject(data.recipe, { ingredients: ingredientsArr });
+    const recipe = updateObject(data.recipe, { ingredients: ingredientsArr, time: calcTime(ingredientsArr) });
     //console.log(recipe);
 
     return recipe;
   } else {
-    //console.log('Fetch unsuccessful');
+    console.log('Fetch unsuccessful');
     return null;
   }
 };
+

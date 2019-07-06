@@ -4,18 +4,18 @@ import classes from '../../App.module.css';
 import nextIcon from '../../img/next.png';
 import backIcon from '../../img/back.png';
 
-const Button = props => {
+const Button = ({paginate, btnType})=> {
   return (
     <button
-      onClick={() => props.paginate(props.btnType)}
+      onClick={() => paginate(btnType)}
       className={
-        props.btnType === 'prev'
+        btnType === 'prev'
           ? classes.results__btn__prev
           : classes.results__btn__next
       }
     >
-      {/* <span>{props.btnNo}</span> */}
-      <img src={props.btnType === 'prev' ? backIcon : nextIcon} alt='' />
+      {/* <span>{btnNo}</span> */}
+      <img src={btnType === 'prev' ? backIcon : nextIcon} alt='' />
     </button>
   );
 };

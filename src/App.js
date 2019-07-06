@@ -20,13 +20,11 @@ class App extends React.Component {
     shoppingList: [],
     currentPage: 1,
   };
-  componentDidMount() {}
   async onQuerySubmit(e, query) {
     e.preventDefault();
     this.setState({ loading: true });
     try {
       const recipes = await fetchRecipes(query);
-
       if (recipes) {
         this.setState(prevState => {
           return updateObject(prevState, {
@@ -45,7 +43,7 @@ class App extends React.Component {
         });
       }
     } catch (e) {
-      alert('Something went wrong');
+      console.log('Something went wrong', e);
     }
   }
   async onRecipeClick(id) {
@@ -65,7 +63,7 @@ class App extends React.Component {
             title: recipe.title,
             author: recipe.publisher,
             img: recipe.image_url,
-            time: 45,
+            time: recipe.time,
             servings: 4,
             ingredients: recipe.ingredients,
             liked: false,
@@ -87,7 +85,7 @@ class App extends React.Component {
         });
       }
     } catch (e) {
-      alert('Something went wrong');
+      console.log('Something went wrong', e);
     }
   }
   onLikeRecipe() {
@@ -111,7 +109,6 @@ class App extends React.Component {
           recipe => recipe.id !== selectedRecipe.id,
         );
         const recipeUnliked = updateObject(selectedRecipe, { liked: false });
-
         return updateObject(prevState, {
           likedRecipes: newArr,
           selectedRecipe: recipeUnliked,
@@ -120,8 +117,9 @@ class App extends React.Component {
     }
   }
   onAddToShoppingCart() {
-    const recipeIngredientsArr = [...this.state.selectedRecipe.ingredients];
-    const newList = [...this.state.shoppingList].concat(recipeIngredientsArr);
+    const newList = [...this.state.shoppingList].concat([
+      ...this.state.selectedRecipe.ingredients,
+    ]);
     this.setState({ shoppingList: newList });
   }
   onRemoveShoppingItem(id) {
@@ -178,7 +176,6 @@ class App extends React.Component {
   }
   render() {
     const itemsPerPage = 10;
-
     const indexOfLastResult = this.state.currentPage * itemsPerPage;
     const indexOfFirstResult = indexOfLastResult - itemsPerPage;
     const currentResults = this.state.searchResults.slice(
@@ -192,12 +189,14 @@ class App extends React.Component {
         <Header
           onQuerySubmit={this.onQuerySubmit.bind(this)}
           likedRecipes={this.state.likedRecipes}
+          // onRecipeClick={id => this.onRecipeClick(id)}
+           onRecipeClick={this.onRecipeClick.bind(this)}
         />
         <SearchResults
           recipes={currentResults}
           error={this.state.error}
           loading={this.state.loading}
-          onRecipeClick={id => this.onRecipeClick(id)}
+          onRecipeClick={this.onRecipeClick.bind(this)}
           postsPerPage={itemsPerPage}
           totalPosts={this.state.searchResults.length}
           paginate={this.paginate.bind(this)}
@@ -208,13 +207,13 @@ class App extends React.Component {
           recipe={this.state.selectedRecipe}
           error={this.state.errorRecipe}
           loading={this.state.loadingRecipe}
-          onLikeClick={id => this.onLikeRecipe(id)}
-          onAddToShoppingCart={() => this.onAddToShoppingCart()}
-          updateServings={type => this.updateServings(type)}
+          onLikeClick={this.onLikeRecipe.bind(this)}
+          onAddToShoppingCart={this.onAddToShoppingCart.bind(this)}
+          updateServings={this.updateServings.bind(this)}
         />
         <ShoppingList
           shoppingList={this.state.shoppingList}
-          onRemoveShoppingItem={ing => this.onRemoveShoppingItem(ing)}
+          onRemoveShoppingItem={this.onRemoveShoppingItem.bind(this)}
           onQuantityChange={this.onShoppingItemQuantityChange.bind(this)}
         />
       </div>

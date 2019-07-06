@@ -3,13 +3,11 @@ import classes from '../../App.module.css';
 
 import RecipeIngItem from './RecipeIngItem';
 
-const RecipeIngList = props => {
+const RecipeIngList = ({ ingredients }) => {
   return (
     <ul className={classes.recipe__ingredientlist}>
-      {props.ingredients &&
-        props.ingredients.map((ing, i) => (
-          <RecipeIngItem ingredient={ing} key={ing.id} />
-        ))}
+      {ingredients &&
+        ingredients.map(ing => <RecipeIngItem ingredient={ing} key={ing.id} />)}
     </ul>
   );
 };

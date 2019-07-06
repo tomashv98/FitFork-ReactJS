@@ -7,35 +7,35 @@ import Spinner from '../Spinner/Spinner';
 import Aux from '../../Aux';
 import { limitTitle } from '../../utils/utility';
 
-const SearchResults = props => {
+const SearchResults = ({loading, error, recipes, onRecipeClick, paginate, pages, currentPage, active})=> {
   return (
     <div className={classes.results}>
-      {props.loading ? <Spinner /> : null}
-      {!props.loading && !props.error && props.recipes ? (
+      {loading ? <Spinner /> : null}
+      {!loading && !error && recipes ? (
         <Aux>
           <ul className={classes.results__list}>
-            {props.recipes.map(recipe => (
+            {recipes.map(({recipe_id, publisher, image_url, title})=> (
               <SearchResult
-                onRecipeClick={props.onRecipeClick}
-                id={recipe.recipe_id}
-                publisher={recipe.publisher}
-                imageURL={recipe.image_url}
-                title={limitTitle(recipe.title)}
-                key={recipe.recipe_id}
+                onRecipeClick={onRecipeClick}
+                id={recipe_id}
+                publisher={publisher}
+                imageURL={image_url}
+                title={limitTitle(title)}
+                key={recipe_id}
               />
             ))}
           </ul>
-          {props.recipes.length >= 10 && (
+          {recipes.length >= 10 && (
             <PaginationButtons
-              paginate={props.paginate}
-              pages={props.pages}
-              currentPage={props.currentPage}
+              paginate={paginate}
+              pages={pages}
+              currentPage={currentPage}
             />
           )}
         </Aux>
       ) : (
         <div>
-          <p>{props.error}</p>
+          <p>{error}</p>
         </div>
       )}
     </div>

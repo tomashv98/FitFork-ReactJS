@@ -2,16 +2,16 @@ import React from 'react';
 import classes from '../../App.module.css';
 
 
-const RecipeHeader = props => {
+const RecipeHeader = ({imageURL, title})=> {
   return (
     <figure className={classes.recipe__fig}>
       <img
-        src={props.imageURL}
+        src={imageURL}
         className={classes.recipe__img}
-        alt={props.title}
+        alt={title}
       />
       <h1 className={classes.recipe__title}>
-        <span>{props.title}</span>
+        <span>{title}</span>
       </h1>
     </figure>
   );
