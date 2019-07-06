@@ -4,7 +4,7 @@ import classes from '../../App.module.css';
 import SearchResult from './SearchResult';
 import PaginationButtons from '../PaginationButtons/PaginationsButtons';
 import Spinner from '../Spinner/Spinner';
-
+import Aux from '../../Aux';
 import { limitTitle } from '../../utils/utility';
 
 const SearchResults = props => {
@@ -12,18 +12,27 @@ const SearchResults = props => {
     <div className={classes.results}>
       {props.loading ? <Spinner /> : null}
       {!props.loading && !props.error && props.recipes ? (
-        <ul className={classes.results__list}>
-          {props.recipes.map(recipe => (
-            <SearchResult
-            onRecipeClick={props.onRecipeClick}
-              id={recipe.recipe_id}
-              publisher={recipe.publisher}
-              imageURL={recipe.image_url}
-              title={limitTitle(recipe.title)}
-              key={recipe.recipe_id}
+        <Aux>
+          <ul className={classes.results__list}>
+            {props.recipes.map(recipe => (
+              <SearchResult
+                onRecipeClick={props.onRecipeClick}
+                id={recipe.recipe_id}
+                publisher={recipe.publisher}
+                imageURL={recipe.image_url}
+                title={limitTitle(recipe.title)}
+                key={recipe.recipe_id}
+              />
+            ))}
+          </ul>
+          {props.recipes.length >= 10 && (
+            <PaginationButtons
+              paginate={props.paginate}
+              pages={props.pages}
+              currentPage={props.currentPage}
             />
-          ))}
-        </ul>
+          )}
+        </Aux>
       ) : (
         <div>
           <p>{props.error}</p>

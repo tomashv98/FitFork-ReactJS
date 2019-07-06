@@ -7,13 +7,14 @@ import backIcon from '../../img/back.png';
 const Button = props => {
   return (
     <button
+      onClick={() => props.paginate(props.btnType)}
       className={
         props.btnType === 'prev'
           ? classes.results__btn__prev
           : classes.results__btn__next
       }
     >
-      <span>{props.btnNo}</span>
+      {/* <span>{props.btnNo}</span> */}
       <img src={props.btnType === 'prev' ? backIcon : nextIcon} alt='' />
     </button>
   );

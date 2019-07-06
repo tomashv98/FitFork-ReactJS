@@ -180,10 +180,10 @@ export const fetchRecipes = async query => {
     `/search?key=${process.env.REACT_APP_RECIPES_API_KEY}&q=${query}`,
   );
   if (data.count > 0) {
-    console.log('Fetch successfull, recipe count: ', data);
+    //console.log('Fetch successfull, recipe count: ', data);
     return data.recipes;
   } else {
-    console.log('Fetch unsuccessfull :(', data);
+    //console.log('Fetch unsuccessfull :(', data);
     return null;
   }
 };
@@ -194,16 +194,16 @@ export const fetchSingleRecipe = async id => {
   );
 
   if (data.recipe.title) {
-    console.log('original', data.recipe.ingredients);
+   // console.log('original', data.recipe.ingredients);
     const ingredientsArr = parseIngredients(data.recipe.ingredients);
-    console.log('parsed', ingredientsArr);
+    //console.log('parsed', ingredientsArr);
 
     const recipe = updateObject(data.recipe, { ingredients: ingredientsArr });
-    console.log(recipe);
+    //console.log(recipe);
 
     return recipe;
   } else {
-    console.log('Fetch unsuccessful');
+    //console.log('Fetch unsuccessful');
     return null;
   }
 };

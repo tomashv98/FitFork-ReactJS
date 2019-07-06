@@ -18,6 +18,7 @@ class App extends React.Component {
     errorRecipe: null,
     likedRecipes: [],
     shoppingList: [],
+    currentPage: 1,
   };
   componentDidMount() {}
   async onQuerySubmit(e, query) {
@@ -44,7 +45,7 @@ class App extends React.Component {
         });
       }
     } catch (e) {
-      console.log('Something went wrong', e);
+      alert('Something went wrong');
     }
   }
   async onRecipeClick(id) {
@@ -57,7 +58,6 @@ class App extends React.Component {
     });
     try {
       const recipe = await fetchSingleRecipe(id);
-      console.log(recipe);
       if (recipe) {
         this.setState(prevState => {
           const selectedRecipe = {
@@ -87,7 +87,7 @@ class App extends React.Component {
         });
       }
     } catch (e) {
-      console.log('Something went wrong', e);
+      alert('Something went wrong');
     }
   }
   onLikeRecipe() {
@@ -105,7 +105,6 @@ class App extends React.Component {
           selectedRecipe: recipeLiked,
         });
       });
-      console.log('Liked');
     } else {
       this.setState(prevState => {
         const newArr = likedRecipeArr.filter(
@@ -118,7 +117,6 @@ class App extends React.Component {
           selectedRecipe: recipeUnliked,
         });
       });
-      console.log('Unliked');
     }
   }
   onAddToShoppingCart() {
@@ -169,7 +167,26 @@ class App extends React.Component {
     }
     console.log('Nothing happened');
   }
+  paginate(type) {
+    let newPageNum = null;
+    if (type === 'prev') {
+      newPageNum = this.state.currentPage - 1;
+    } else if (type === 'next') {
+      newPageNum = this.state.currentPage + 1;
+    }
+    this.setState({ currentPage: newPageNum });
+  }
   render() {
+    const itemsPerPage = 10;
+
+    const indexOfLastResult = this.state.currentPage * itemsPerPage;
+    const indexOfFirstResult = indexOfLastResult - itemsPerPage;
+    const currentResults = this.state.searchResults.slice(
+      indexOfFirstResult,
+      indexOfLastResult,
+    );
+    const pages = Math.ceil(this.state.searchResults.length / itemsPerPage);
+
     return (
       <div className={classes.container}>
         <Header
@@ -177,10 +194,15 @@ class App extends React.Component {
           likedRecipes={this.state.likedRecipes}
         />
         <SearchResults
-          recipes={this.state.searchResults}
+          recipes={currentResults}
           error={this.state.error}
           loading={this.state.loading}
           onRecipeClick={id => this.onRecipeClick(id)}
+          postsPerPage={itemsPerPage}
+          totalPosts={this.state.searchResults.length}
+          paginate={this.paginate.bind(this)}
+          pages={pages}
+          currentPage={this.state.currentPage}
         />
         <Recipe
           recipe={this.state.selectedRecipe}
