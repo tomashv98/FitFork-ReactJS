@@ -34,9 +34,9 @@ const SearchResults = ({loading, error, recipes, onRecipeClick, paginate, pages,
           )}
         </Aux>
       ) : (
-        <div>
-          <p>{error}</p>
-        </div>
+      
+          <p className={classes.error__message}>{error}</p>
+       
       )}
     </div>
   );

@@ -7,7 +7,7 @@ const SearchResult = ({
   title,
   publisher,
   onRecipeClick,
-  active,
+
 }) => {
   return (
     <li>

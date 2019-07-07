@@ -22,9 +22,3 @@ const Button = ({paginate, btnType})=> {
 
 export default Button;
 
-/* <button class="btn-inline results__btn--next">
-                    <span>Page 3</span>
-                    <svg class="search__icon">
-                        <use href="img/icons.svg#icon-triangle-right"></use>
-                    </svg>
-                </button> */

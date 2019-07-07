@@ -22,7 +22,7 @@ class App extends React.Component {
   };
   async onQuerySubmit(e, query) {
     e.preventDefault();
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: null });
     try {
       const recipes = await fetchRecipes(query);
       if (recipes) {

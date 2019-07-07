@@ -5,7 +5,7 @@ import classes from '../../App.module.css';
 const LikedRecipe = ({img, onRecipeClick, id, title, author})=> {
   return (
     <li>
-    <a className={classes.likes__link} href='#23456' onClick={()=>onRecipeClick(id)}>
+    <a className={classes.likes__link} href='#' onClick={()=>onRecipeClick(id)}>
       <figure className={classes.likes__fig}>
         <img src={img} alt='Test' />
       </figure>

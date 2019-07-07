@@ -81,7 +81,7 @@ body {
   padding: 1.3rem 3rem;
   font-size: 1.4rem;
 }
-.btn svg {
+.btn img {
   height: 2.25rem;
   width: 2.25rem;
   fill: currentColor;
@@ -94,9 +94,9 @@ body {
   padding: 1rem 1.75rem;
   text-decoration: none;
 }
-.btn_small svg,
-.btn_small:link svg,
-.btn_small:visited svg {
+.btn_small img,
+.btn_small:link img,
+.btn_small:visited img {
   height: 1.5rem;
   width: 1.5rem;
   fill: currentColor;
@@ -114,7 +114,7 @@ body {
   align-items: center;
   transition: all 0.2s;
 }
-.btn-inline svg {
+.btn-inline img {
   height: 1.5rem;
   width: 1.5rem;
   fill: currentColor;
@@ -147,11 +147,11 @@ body {
 .btn_tiny:focus {
   outline: none;
 }
-.btn_tiny:hover svg {
+.btn_tiny:hover img {
   fill: #f48982;
   transform: translateY(-1px);
 }
-.btn_tiny:active svg {
+.btn_tiny:active img {
   fill: #f48982;
   transform: translateY(0);
 }
@@ -178,27 +178,6 @@ body {
 .link:link,
 .link:visited {
   color: #968b87;
-}
-
-.loader {
-  margin: 5rem auto;
-  text-align: center;
-}
-.loader svg {
-  height: 5.5rem;
-  width: 5.5rem;
-  fill: #f59a83;
-  transform-origin: 44% 50%;
-  animation: rotate 1.5s infinite linear;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .header {
@@ -307,7 +286,7 @@ body {
 }
 .results__link__active,
 .likes__link__active {
-  background-color: #f9f5f3;
+  background-color: #72aafd;
 }
 .results__fig,
 .likes__fig {
@@ -475,7 +454,7 @@ body {
 .recipe__love:focus {
   outline: none;
 }
-.recipe__love svg {
+.recipe__love img {
   height: 2.75rem;
   width: 2.75rem;
   fill: #fff;
@@ -698,4 +677,13 @@ body {
 .recipe__info_data {
   margin-right: 0.4rem;
   font-weight: 600;
+}
+.error__message {
+  margin: auto;
+  text-align: center;
+  color: #f48982;
+  font-size: 3.5rem;
+  padding-top: 2rem;
+  text-transform: uppercase;
+  font-weight: 500;
 }
